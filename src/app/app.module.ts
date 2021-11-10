@@ -7,39 +7,29 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-rounting.module';
+import { PagesModule } from './pages/pages.module';
+import { SharedModule } from './shared/shared.module';
 
 
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { NopagefoundComponent } from './pages/nopagefound/nopagefound.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { HeaderComponent } from './shared/header/header.component';
-import { Grafica1Component } from './pages/grafica1/grafica1.component';
-import { ProgressComponent } from './pages/progress/progress.component';
-import { PagesComponent } from './pages/pages.component';
+import { AuthModule } from './auth/auth.module';
+
+
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    NopagefoundComponent,
-    DashboardComponent,
-    BreadcrumbsComponent,
-    SidebarComponent,
-    HeaderComponent,
-    Grafica1Component,
-    ProgressComponent,
-    PagesComponent
+    AppComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule,
+    PagesModule,
+    AuthModule
+
   ],
 
   providers: [],
