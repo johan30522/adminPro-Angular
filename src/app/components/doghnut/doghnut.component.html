@@ -1,0 +1,14 @@
+<div class="card">
+    <div class="card-body">
+        <h1 class="card-title">{{graficaConf.tittle}}</h1>
+        <div>
+            <div>
+                <div style="display: block">
+                    <canvas baseChart [data]="graficaConf.doughnutChartData" [labels]="graficaConf.doughnutChartLabels" [chartType]="doughnutChartType" [colors]="graficaConf.colors">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
