@@ -1,3 +1,4 @@
+import { AuthTokenGuard } from './guards/auth-token.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -18,7 +19,9 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/pages.module').then(
         (module) => module.PagesModule
-      )
+      ),
+      canActivate:[AuthTokenGuard],
+      canLoad:[AuthTokenGuard]
   },
   {
     path: '**',

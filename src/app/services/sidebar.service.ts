@@ -18,8 +18,20 @@ export class SidebarService {
           url:'/app/grafica'
         },
         {
-          tittle:'Grafica',
+          tittle:'Grafics',
           url:'/app/progress'
+        },
+        {
+          tittle:'Promises',
+          url:'/app/promises'
+        },
+        {
+          tittle:'Observers',
+          url:'/app/observers'
+        },
+        {
+          tittle:'RxJS',
+          url:'/app/rxjs'
         }
       ]
     }
