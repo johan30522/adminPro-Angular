@@ -1,12 +1,15 @@
+import { Usuario } from './../../models/usuario.model';
 import { Injectable, NgZone } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
-import { RegisterForm, AuthResponse, Usuario } from '../../Interfaces/register.interface.ts';
+import { RegisterForm, AuthResponse } from '../../Interfaces/register.interface.ts';
 import { environment } from '../../../environments/environment';
 import { catchError, map, tap } from 'rxjs/operators';
 import { LoginForm } from 'src/app/Interfaces/login.interface';
 import { Router } from '@angular/router';
+
+
 
 declare const gapi: any;
 
@@ -17,11 +20,18 @@ declare const gapi: any;
 })
 export class UsuarioService {
 
-  private _usuario!: Usuario;
+  public _usuario!: Usuario;
   public auth2: any;
 
   get usuario() {
-    return { ...this._usuario };
+    return this._usuario ;
+  }
+
+  
+
+  get headers():HttpHeaders{
+    return new HttpHeaders()
+    .set('x-token', localStorage.getItem('token') || '')
   }
 
   private _urlApi: string = environment.baseUrlApi;
@@ -53,10 +63,6 @@ export class UsuarioService {
   }
 
   public createUser(data: RegisterForm) {
-    console.log('creando Usuario');
-
-
-
 
     const url = `${this._urlApi}usuario`
 
@@ -71,6 +77,29 @@ export class UsuarioService {
         map(resp => resp.ok),
         catchError(err => of(err.error.msj))
       )
+  }
+
+  public updateUser(data: Usuario) {
+
+    const url = `${this._urlApi}usuario/${this._usuario.uid}`
+    const headers = this.headers;
+    data.role=this._usuario.role;
+
+    return this.httpClient.put<AuthResponse>(url, data, { headers })
+      .pipe(
+        map(resp => {
+    
+          this._usuario.name=resp.usuario!.name;
+          this._usuario.email=resp.usuario!.email;
+
+          return resp.ok;
+        }),
+        catchError(err => of(err.error.msj))
+      )
+  }
+
+  public obtieneUsuario():Observable<Usuario>{
+    return of (this._usuario);
   }
 
   public login(formData: LoginForm) {
@@ -117,12 +146,16 @@ export class UsuarioService {
     return this.httpClient.get<AuthResponse>(url, { headers })
       .pipe(
         map(resp => {
-          localStorage.setItem('token', resp.token!)
-          this._usuario = {
-            name: resp.name!,
-            uid: resp.uid!,
-            email: resp.email!
-          }
+         localStorage.setItem('token', resp.token!);
+          this._usuario = new Usuario(
+            resp.usuario!.uid,
+            resp.usuario!.name,
+            resp.usuario!.email,
+            resp.usuario!.img,
+            resp.usuario!.google,
+            resp.usuario!.role
+          );
+          //this._usuario = resp.usuario!;
           return resp.ok;
         }),
         catchError(err => of(false))
