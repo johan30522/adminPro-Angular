@@ -1,3 +1,4 @@
+import { Usuario } from './../../models/usuario.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../auth/services/usuario.service';
@@ -15,11 +16,18 @@ import { UsuarioService } from '../../auth/services/usuario.service';
 })
 export class HeaderComponent implements OnInit {
 
+  public usuario?:Usuario;
+
   constructor( 
     private router:Router,
     private readonly usuarioService:UsuarioService) { }
 
   ngOnInit(): void {
+
+    
+   this.usuario=this.usuarioService._usuario;
+
+
   }
 
   public logout():void{

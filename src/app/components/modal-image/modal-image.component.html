@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Cambio de Imagen</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+
+    <div class="text-center">
+        <img *ngIf="imagenSubir" [src]="imgTemp" alt="" class="img-avatar">
+        <br>
+        <span *ngIf="imagenSubir">Vista Previa de Imagen a Cargar</span>
+        <img *ngIf="!imagenSubir" [src]="objeto!.imagenUrl" alt="" class="img-avatar">
+
+    </div>
+    <div class="text-center">
+        <br>
+        <input class="form-control form-control-sm" type="file" (change)="uploadImageAction($event)">
+        <br>
+        <br>
+
+
+        <button *ngIf="imagenSubir" type="submit" class="btn btn-success waves-effect waves-light m-r-10" [disabled]="!imagenSubir" (click)="subirImagen()"><i class="fa fa-save"> Actualizar Imagen</i></button>
+    </div>
+
+
+</div>

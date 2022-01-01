@@ -36,8 +36,7 @@ export class RegisterComponent implements OnInit {
   public signup(): void {
     this.formSubmitted = true;
 
-    console.log(this.registerForm.value);
-    console.log(this.registerForm.controls);
+    
     if (this.registerForm.invalid) {
       console.log('formulario invalido');
       return;

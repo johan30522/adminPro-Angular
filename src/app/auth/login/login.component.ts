@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
 
   }
   public async startApp() {
-    
+
     await this.authService.initGoogle();
     this.auth2=this.authService.auth2;
     this.attachSignin(document.getElementById('my-signin2'));
@@ -98,7 +98,7 @@ export class LoginComponent implements OnInit {
       (googleUser: any) => {
         const id_token = googleUser.getAuthResponse().id_token;
         console.log(id_token);
-
+        console.log('logueando con google');
         this.authService.loginGoogle(id_token).subscribe((resp) => {
           console.log(resp);
           if (resp === true) {

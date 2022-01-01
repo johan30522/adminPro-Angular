@@ -14,11 +14,15 @@ export interface AuthResponse{
     email?:string,
     name?:string,
     token?: string,
-    tokenAuth?:string
+    tokenAuth?:string,
+    usuario?:Usuario
 }
 
 export interface Usuario{
     uid:string;
     name:string;
     email?:string;
+    img?:string;
+    role?:string;
+    google?:boolean;
 }

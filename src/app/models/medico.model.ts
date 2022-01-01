@@ -1,6 +1,6 @@
 import { environment } from '../../environments/environment';
 const base_URL = environment.baseUrlApi;
-export class Usuario {
+export class Medico {
 
     constructor(
         public uid: string,
@@ -19,13 +19,13 @@ export class Usuario {
         //console.log(this.email,this.img);
         if (!this.img) {
             
-            imgReturn = `${base_URL}upload/usuarios/no-image.png`;
+            imgReturn = `${base_URL}upload/medicos/no-image.png`;
         } else {
             if (this.img!.includes('https')) {
                 imgReturn = this.img!;
             } else {
                 let image = this.img ? this.img : 'no-image.png';
-                imgReturn = `${base_URL}upload/usuarios/${image}`;
+                imgReturn = `${base_URL}upload/medicos/${image}`;
             }
         }
 

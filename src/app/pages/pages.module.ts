@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -16,6 +16,10 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PromisesComponent } from './promises/promises.component';
 import { ObserversComponent } from './observers/observers.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { ProfileComponent } from './profile/profile.component';
+import { UsuariosComponent } from './mantenimientos/pages/mantenimientos/usuarios/usuarios.component';
+import { HospitalesComponent } from './mantenimientos/pages/mantenimientos/hospitales/hospitales.component';
+import { MedicosComponent } from './mantenimientos/pages/mantenimientos/medicos/medicos.component';
 
 
 @NgModule({
@@ -28,6 +32,10 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     PromisesComponent,
     ObserversComponent,
     RxjsComponent,
+    ProfileComponent,
+    UsuariosComponent,
+    HospitalesComponent,
+    MedicosComponent,
   ],
   exports:[
     Grafica1Component,
@@ -40,7 +48,9 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     SharedModule,
     PagesRoutingModule,
     FormsModule,
-    ComponentsModule
+    ComponentsModule,
+    ReactiveFormsModule
+
 
   ]
 })

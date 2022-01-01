@@ -5,9 +5,10 @@ import { Observable, of } from 'rxjs';
 
 import { RegisterForm, AuthResponse } from '../../Interfaces/register.interface.ts';
 import { environment } from '../../../environments/environment';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, tap, delay } from 'rxjs/operators';
 import { LoginForm } from 'src/app/Interfaces/login.interface';
 import { Router } from '@angular/router';
+import { CargaUsuario } from 'src/app/Interfaces/cargar-usuarios.interface';
 
 
 
@@ -24,14 +25,14 @@ export class UsuarioService {
   public auth2: any;
 
   get usuario() {
-    return this._usuario ;
+    return this._usuario;
   }
 
-  
 
-  get headers():HttpHeaders{
+
+  get headers(): HttpHeaders {
     return new HttpHeaders()
-    .set('x-token', localStorage.getItem('token') || '')
+      .set('x-token', localStorage.getItem('token') || '')
   }
 
   private _urlApi: string = environment.baseUrlApi;
@@ -83,14 +84,14 @@ export class UsuarioService {
 
     const url = `${this._urlApi}usuario/${this._usuario.uid}`
     const headers = this.headers;
-    data.role=this._usuario.role;
+    data.role = this._usuario.role;
 
     return this.httpClient.put<AuthResponse>(url, data, { headers })
       .pipe(
         map(resp => {
-    
-          this._usuario.name=resp.usuario!.name;
-          this._usuario.email=resp.usuario!.email;
+
+          this._usuario.name = resp.usuario!.name;
+          this._usuario.email = resp.usuario!.email;
 
           return resp.ok;
         }),
@@ -98,8 +99,24 @@ export class UsuarioService {
       )
   }
 
-  public obtieneUsuario():Observable<Usuario>{
-    return of (this._usuario);
+  public saveUser(data: Usuario) {
+
+    const url = `${this._urlApi}usuario/${data.uid}`
+    const headers = this.headers;
+    data.role = this._usuario.role;
+
+    return this.httpClient.put<AuthResponse>(url, data, { headers })
+      .pipe(
+        map(resp => {
+          return resp.ok;
+        }),
+        catchError(err => of(err.error.msj))
+      )
+  }
+
+
+  public obtieneUsuario(): Observable<Usuario> {
+    return of(this._usuario);
   }
 
   public login(formData: LoginForm) {
@@ -146,7 +163,7 @@ export class UsuarioService {
     return this.httpClient.get<AuthResponse>(url, { headers })
       .pipe(
         map(resp => {
-         localStorage.setItem('token', resp.token!);
+          localStorage.setItem('token', resp.token!);
           this._usuario = new Usuario(
             resp.usuario!.uid,
             resp.usuario!.name,
@@ -173,4 +190,32 @@ export class UsuarioService {
 
     });
   }
+
+  public cargarListaUsuarios(desde: number = 0) {
+    const url = `${this._urlApi}usuario?desde=${desde}`;
+    const headers = this.headers;
+    return this.httpClient.get<CargaUsuario>(url, { headers })
+      .pipe(
+        map((resp) => {
+          console.log(resp);
+          const usuarios=resp.usuarios
+            .map(user=>new Usuario(user.uid,user.name,user.email,user.img,user.google,user.role))
+          return {total:resp.total,usuarios};
+        })
+      );
+  }
+
+  public deletUsuario(id: string): Observable<any> {
+    console.log(id);
+    const url = `${this._urlApi}usuario/${id}`;
+    const headers = this.headers;
+    return this.httpClient
+      .delete<any>(url,{headers})
+        .pipe(
+          map((resp) => resp.ok),
+          catchError(err => of(err.error.msj))
+        )
+
+  }
+  
 }
