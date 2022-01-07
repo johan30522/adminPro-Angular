@@ -10,7 +10,7 @@
         <img *ngIf="imagenSubir" [src]="imgTemp" alt="" class="img-avatar">
         <br>
         <span *ngIf="imagenSubir">Vista Previa de Imagen a Cargar</span>
-        <img *ngIf="!imagenSubir" [src]="objeto!.imagenUrl" alt="" class="img-avatar">
+        <img *ngIf="!imagenSubir" [src]="objeto!.img|imagenUrl:tipoImagen" alt="" class="img-avatar">
 
     </div>
     <div class="text-center">

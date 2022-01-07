@@ -6,6 +6,7 @@ import { DoghnutComponent } from './doghnut/doghnut.component';
 
 import { ChartsModule } from 'ng2-charts';
 import { ModalImageComponent } from './modal-image/modal-image.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 @NgModule({
@@ -22,7 +23,9 @@ import { ModalImageComponent } from './modal-image/modal-image.component';
   imports: [
     CommonModule,
     FormsModule,
-    ChartsModule
+    ChartsModule,
+    PipesModule
+    
   ]
 })
 export class ComponentsModule { }

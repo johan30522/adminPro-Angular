@@ -123,7 +123,7 @@ export class UsuariosComponent implements OnInit {
 
   public cambiarRole(usuario: Usuario) {
 
-console.log(usuario);
+    console.log(usuario);
 
     this.usuarioService.saveUser(usuario).subscribe(
       (resp) => {
@@ -144,13 +144,10 @@ console.log(usuario);
         }
 
       })
-
-
-
   }
 
 
-  public showModal(usuario:Usuario):void{
+  public showModal(usuario: Usuario): void {
     const modalRef = this.modalService.open(ModalImageComponent, {
       size: 'md',
       centered: true,

@@ -30,9 +30,11 @@ export class ModalImageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.objeto.name);
+    console.log('obtiene el objeto');
+    console.log(this.objeto);
 
-    console.log(this.getTipo());
+    this.getTipo();
+    console.log('tipos ngoninit',this.tipoImagen);
     
   }
 

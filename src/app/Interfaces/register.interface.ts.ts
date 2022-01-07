@@ -1,3 +1,5 @@
+import { Hospital } from "../models/hospital.model";
+
 export interface RegisterForm {
     name:   string;
     email:  string;
@@ -5,7 +7,6 @@ export interface RegisterForm {
     password2:    string;
     terminos:boolean
 }
-
 
 export interface AuthResponse{
     ok: boolean,
@@ -25,4 +26,10 @@ export interface Usuario{
     img?:string;
     role?:string;
     google?:boolean;
+}
+
+export interface HospResponse{
+    ok: boolean,
+    msj?: string,
+    hospital:Hospital
 }

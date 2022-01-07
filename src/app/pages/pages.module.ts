@@ -20,6 +20,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './mantenimientos/pages/mantenimientos/usuarios/usuarios.component';
 import { HospitalesComponent } from './mantenimientos/pages/mantenimientos/hospitales/hospitales.component';
 import { MedicosComponent } from './mantenimientos/pages/mantenimientos/medicos/medicos.component';
+import { PipesModule } from '../pipes/pipes.module';
+import { ModalHospitalComponent } from './mantenimientos/pages/mantenimientos/modal-hospital/modal-hospital.component';
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import { MedicosComponent } from './mantenimientos/pages/mantenimientos/medicos/
     UsuariosComponent,
     HospitalesComponent,
     MedicosComponent,
+    ModalHospitalComponent,
   ],
   exports:[
     Grafica1Component,
@@ -49,7 +52,8 @@ import { MedicosComponent } from './mantenimientos/pages/mantenimientos/medicos/
     PagesRoutingModule,
     FormsModule,
     ComponentsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PipesModule
 
 
   ]

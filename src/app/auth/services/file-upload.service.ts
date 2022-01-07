@@ -27,6 +27,7 @@ export class FileUploadService {
     try {
 
       const url = `${this._urlApi}upload/${tipo}/${id}`;
+      console.log(url);
       const formData = new FormData();
       formData.append('imagen', file);
 
