@@ -75,10 +75,10 @@ export class UsuariosComponent implements OnInit {
     }
 
     this.loading = true;
-    this.searchService.buscarUsuarios('usuarios', termino)
+    this.searchService.buscar('usuarios', termino)
       .subscribe((resp) => {
         console.log(resp);
-        this.listaUsuarios = resp;
+        this.listaUsuarios = resp as Usuario[];
         this.loading = false;
       })
   }

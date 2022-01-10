@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalImageComponent } from '../../../../../components/modal-image/modal-image.component';
 import { ModalHospitalComponent } from '../modal-hospital/modal-hospital.component';
+import { SearchService } from '../../../../../services/search.service';
 
 @Component({
   selector: 'app-hospitales',
@@ -22,7 +23,8 @@ export class HospitalesComponent implements OnInit {
 
   constructor(
     private readonly hospiatlService:HospitalesService,
-    private readonly modalService:NgbModal
+    private readonly modalService:NgbModal,
+    private readonly searchService:SearchService
 
   ) { }
 
@@ -32,7 +34,7 @@ export class HospitalesComponent implements OnInit {
 
 
   public loadHospitals():void{
-    this.hospiatlService.getHospitals(0)
+    this.hospiatlService.getHospitals(this.desde)
     .subscribe(({total,hospitales})=>{
       console.log(hospitales);
       this.totalHospital = total;
@@ -122,12 +124,28 @@ public createHospital(){
     size: 'md',
     centered: true,
   });
+  modalRef.componentInstance.successfulTransaction.subscribe(() => {
+    this.loadHospitals()
+  });
+}
 
 
+public buscar(termino: string): void {
+  console.log(termino);
 
-  /*modalRef.componentInstance.successfulTransaction.subscribe(() => {
-    this.loadUsuarios()
-  });*/
+  if (termino.length === 0) {
+
+    this.listaHospitales = this.listaHospitalTemp
+    return
+  }
+
+  this.loading = true;
+  this.searchService.buscar('hospitales', termino)
+    .subscribe((resp) => {
+      console.log(resp);
+      this.listaHospitales = resp as Hospital[];
+      this.loading = false;
+    })
 }
 
 

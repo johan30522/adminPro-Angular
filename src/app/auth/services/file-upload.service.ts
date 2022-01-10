@@ -41,6 +41,7 @@ export class FileUploadService {
 
       const data = await (resp.json());
       if (data.ok) {
+        console.log(data);
         return data.nombreArchivo;
       } else {
         console.log(data.msg);

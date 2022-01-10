@@ -22,6 +22,7 @@ export class ModalImageComponent implements OnInit {
   public imgTemp?:any|null;
   public tipoImagen!:'usuarios'|'medicos'|'hospitales';
 
+
   constructor(
     private modalService: NgbModal,
     private readonly uploadImage: FileUploadService
@@ -79,8 +80,12 @@ export class ModalImageComponent implements OnInit {
 
   public subirImagen(){
     this.getTipo();
-    this.uploadImage.updateFile(this.imagenSubir!,this.tipoImagen,this.objeto?.uid!)
+    const key=this.objeto.uid?this.objeto.uid:this.objeto.id;
+
+
+    this.uploadImage.updateFile(this.imagenSubir!,this.tipoImagen,key)
     .then((resp)=>{
+      console.log(resp);
       this.objeto!.img=resp;
       Swal.fire({
         position: 'top-end',

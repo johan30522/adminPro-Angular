@@ -5,6 +5,7 @@ import { CargaUsuario } from '../Interfaces/cargar-usuarios.interface';
 import { Usuario } from '../models/usuario.model';
 import { catchError, map, tap, delay } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { Hospital } from '../models/hospital.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,13 @@ export class SearchService {
       user => new Usuario(user.uid, user.name, user.email, user.img, user.google, user.role)
     );
   }
+  public tranformaHospital(resultados: any[]): Hospital[] {
+    return resultados.map(
+      hosp => new Hospital(hosp.name, hosp.id, hosp.img, hosp.usuario)
+    );
+  }
 
-  public buscarUsuarios(tabla: string, termino: string) {
+  public buscar(tabla: string, termino: string) {
     const url = `${this._urlApi}todo/coleccion/${tabla}/${termino}`;
     const headers = this.headers;
 
@@ -42,9 +48,10 @@ export class SearchService {
           switch (tabla) {
             case 'usuarios':
               return this.tranformaUsuario(resp.results)
-
+            case 'hospitales':
+              return this.tranformaHospital(resp.results)
             default:
-              return  [];
+              return [];
           }
         })
       )

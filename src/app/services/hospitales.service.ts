@@ -76,12 +76,14 @@ export class HospitalesService {
 
   public createHospital(data: Hospital) {
 
-    const url = `${this._urlApi}hospitales/${data.id}`
+
+    const url = `${this._urlApi}hospitales`
     const headers = this.headers;
     
     return this.httpClient.post<HospResponse>(url, data, { headers })
       .pipe(
         map(resp => {
+          
           return resp.ok;
         }),
         catchError(err => of(err.error.msj))

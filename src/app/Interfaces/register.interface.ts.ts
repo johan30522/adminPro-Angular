@@ -1,4 +1,5 @@
 import { Hospital } from "../models/hospital.model";
+import { Medico } from '../models/medico.model';
 
 export interface RegisterForm {
     name:   string;
@@ -32,4 +33,10 @@ export interface HospResponse{
     ok: boolean,
     msj?: string,
     hospital:Hospital
+}
+
+export interface MedResponse{
+    ok: boolean,
+    msj?: string,
+    medico:Medico
 }

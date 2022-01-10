@@ -22,6 +22,7 @@ import { HospitalesComponent } from './mantenimientos/pages/mantenimientos/hospi
 import { MedicosComponent } from './mantenimientos/pages/mantenimientos/medicos/medicos.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { ModalHospitalComponent } from './mantenimientos/pages/mantenimientos/modal-hospital/modal-hospital.component';
+import { ModalMedicoComponent } from './mantenimientos/pages/mantenimientos/modal-medico/modal-medico.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { ModalHospitalComponent } from './mantenimientos/pages/mantenimientos/mo
     HospitalesComponent,
     MedicosComponent,
     ModalHospitalComponent,
+    ModalMedicoComponent,
   ],
   exports:[
     Grafica1Component,
