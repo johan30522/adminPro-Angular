@@ -33,6 +33,8 @@ export class HospitalesComponent implements OnInit {
   }
 
 
+  
+
   public loadHospitals():void{
     this.hospiatlService.getHospitals(this.desde)
     .subscribe(({total,hospitales})=>{
