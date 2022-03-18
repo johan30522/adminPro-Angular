@@ -1,0 +1,96 @@
+<div class="row animate__bounceOut">
+
+    <div class="col-4">
+        <div class="card">
+            <h3>Hospitales</h3>
+            <div class="card-body">
+                <h3></h3>
+                <div *ngIf="hospitales.length===0" class="alert alert-info">
+                    <p class="mb-0">
+                        no hay terminos con ese criterio.
+                    </p>
+                </div>
+                <div *ngIf="hospitales.length>0" class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Foto</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let hospital of hospitales" class="animated fadeIn slow">
+                                <td><img [src]="hospital.img! |imagenUrl:'hospitales'" class="w100"></td>
+                                <td>{{hospital.name}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <h3>Medicos</h3>
+            <div class="card-body">
+                <h3></h3>
+                <div *ngIf="medicos.length===0" class="alert alert-info">
+                    <p class="mb-0">
+                        no hay terminos con ese criterio.
+                    </p>
+                </div>
+                <div *ngIf="medicos.length>0" class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Foto</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let medico of medicos" class="animated fadeIn fast">
+                                <td><img [src]="medico.img! |imagenUrl:'medicos'" class="w75"></td>
+                                <td>{{medico.name}}</td>
+                                <a (click)="editMedico(medico)" data-toggle="tooltip" data-original-title="guardar" class="cursorPointer"> <i class="fa fa-edit text-inverse m-r-10"></i> </a>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <h3>Usuarios</h3>
+            <div class="card-body">
+                <h3></h3>
+                <div *ngIf="usuarios.length===0" class="alert alert-info">
+                    <p class="mb-0">
+                        no hay terminos con ese criterio.
+                    </p>
+                </div>
+                <div *ngIf="usuarios.length>0" class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Foto</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let usuario of usuarios" class="animated fadeIn fast">
+                                <td><img [src]="usuario.img! |imagenUrl:'usuarios'" class="w75"></td>
+                                <td>{{usuario.name}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

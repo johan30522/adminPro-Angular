@@ -27,6 +27,9 @@ export class UsuarioService {
   get usuario() {
     return this._usuario;
   }
+  get role(){
+    return this.usuario.role;
+  }
 
 
 
@@ -49,7 +52,7 @@ export class UsuarioService {
 
 
   public initGoogle() {
-    console.log('google Init');
+
     return new Promise<void>(resolve => {
       gapi.load('auth2', () => {
         this.auth2 = gapi.auth2.init({
@@ -71,8 +74,8 @@ export class UsuarioService {
       .pipe(
         tap(resp => {
           if (resp.ok) {
-            console.log(resp);
-            localStorage.setItem('token', resp.token!)
+        
+            this.writeLocalStorage(resp)
           }
         }),
         map(resp => resp.ok),
@@ -119,6 +122,10 @@ export class UsuarioService {
     return of(this._usuario);
   }
 
+
+
+
+
   public login(formData: LoginForm) {
 
     const url = `${this._urlApi}auth/`
@@ -127,7 +134,8 @@ export class UsuarioService {
       .pipe(
         tap(resp => {
           if (resp.ok) {
-            localStorage.setItem('token', resp.token!)
+
+            this.writeLocalStorage(resp)
           }
         }),
         map(resp => resp.ok),
@@ -146,7 +154,8 @@ export class UsuarioService {
       .pipe(
         tap(resp => {
           if (resp.ok) {
-            localStorage.setItem('token', resp.tokenAuth!)
+
+            this.writeLocalStorage(resp)
           }
         }),
         map(resp => resp.ok),
@@ -159,11 +168,11 @@ export class UsuarioService {
     const url = `${this._urlApi}auth/renew`;
     const headers = new HttpHeaders()
       .set('x-token', localStorage.getItem('token') || '')
-
     return this.httpClient.get<AuthResponse>(url, { headers })
       .pipe(
         map(resp => {
-          localStorage.setItem('token', resp.token!);
+
+          this.writeLocalStorage(resp)
           this._usuario = new Usuario(
             resp.usuario!.uid,
             resp.usuario!.name,
@@ -181,6 +190,8 @@ export class UsuarioService {
   }
   public logOut() {
     localStorage.removeItem('token');
+    localStorage.removeItem('menu');
+    //TODO borrar menu
 
     this.auth2.signOut().then(() => {
 
@@ -197,28 +208,35 @@ export class UsuarioService {
     return this.httpClient.get<CargaUsuario>(url, { headers })
       .pipe(
         map((resp) => {
-          console.log(resp);
-          const usuarios=resp.usuarios
-            .map(user=>new Usuario(user.uid,user.name,user.email,user.img,user.google,user.role))
-          return {total:resp.total,usuarios};
+ 
+          const usuarios = resp.usuarios
+            .map(user => new Usuario(user.uid, user.name, user.email, user.img, user.google, user.role))
+          return { total: resp.total, usuarios };
         })
       );
   }
 
   public deletUsuario(id: string): Observable<any> {
-    console.log(id);
+   
     const url = `${this._urlApi}usuario/${id}`;
     const headers = this.headers;
     return this.httpClient
-      .delete<any>(url,{headers})
-        .pipe(
-          map((resp) => resp.ok),
-          catchError(err => of(err.error.msj))
-        )
+      .delete<any>(url, { headers })
+      .pipe(
+        map((resp) => resp.ok),
+        catchError(err => of(err.error.msj))
+      )
 
   }
 
+  public writeLocalStorage(respuesta: AuthResponse): void {
+ 
+    let menu: any = respuesta.menu!;
+    localStorage.setItem('token', respuesta.token!);
+    localStorage.setItem('menu', JSON.stringify(menu));
+  }
 
-  
-  
+
+
+
 }

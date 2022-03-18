@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
 
   public loadDefaults(): void {
     let rememberValue = localStorage.getItem('remember') === 'true' ? true : false;
-    console.log(rememberValue);
     this.miForm.reset({
       email: localStorage.getItem('email'),
       remember: rememberValue
@@ -43,14 +42,11 @@ export class LoginComponent implements OnInit {
   }
 
   public login(): void {
-    console.log('login');
-    console.log(this.miForm.value);
 
     const formData = this.miForm.value;
 
     this.authService.login(formData).subscribe(
       (resp) => {
-        console.log(resp);
         if (resp === true) {
           console.log('autenticado');
           if (formData.remember) {
@@ -93,14 +89,12 @@ export class LoginComponent implements OnInit {
 
   }
   public attachSignin(element: any) {
-    console.log(element.id);
     this.auth2.attachClickHandler(element, {},
       (googleUser: any) => {
         const id_token = googleUser.getAuthResponse().id_token;
-        console.log(id_token);
-        console.log('logueando con google');
+
         this.authService.loginGoogle(id_token).subscribe((resp) => {
-          console.log(resp);
+
           if (resp === true) {
             this.ngZone.run(() => {
               this.router.navigateByUrl('/app/dashboard')

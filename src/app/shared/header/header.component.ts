@@ -34,5 +34,12 @@ export class HeaderComponent implements OnInit {
     this.usuarioService.logOut();
   }
 
+  public search(termino:string){
+    if(termino.length===0){
+      return;
+    }
+    this.router.navigateByUrl(`/app/search/${termino}`);
+  }
+
 
 }

@@ -14,7 +14,6 @@ export class DashboardComponent implements OnInit {
   constructor(private readonly authService:UsuarioService) { }
 
   ngOnInit(): void {
-console.log(this.actualUser);
 
   }
 

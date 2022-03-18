@@ -33,7 +33,8 @@ export class HospitalesComponent implements OnInit {
   }
 
 
-  
+//
+
 
   public loadHospitals():void{
     this.hospiatlService.getHospitals(this.desde)
@@ -151,5 +152,6 @@ public buscar(termino: string): void {
 }
 
 
+//
 
 }

@@ -23,6 +23,8 @@ import { MedicosComponent } from './mantenimientos/pages/mantenimientos/medicos/
 import { PipesModule } from '../pipes/pipes.module';
 import { ModalHospitalComponent } from './mantenimientos/pages/mantenimientos/modal-hospital/modal-hospital.component';
 import { ModalMedicoComponent } from './mantenimientos/pages/mantenimientos/modal-medico/modal-medico.component';
+import { SearchComponent } from './search/search.component';
+import { ChatbotComponent } from './chatbot/chatbot.component';
 
 
 @NgModule({
@@ -41,6 +43,8 @@ import { ModalMedicoComponent } from './mantenimientos/pages/mantenimientos/moda
     MedicosComponent,
     ModalHospitalComponent,
     ModalMedicoComponent,
+    SearchComponent,
+    ChatbotComponent,
   ],
   exports:[
     Grafica1Component,

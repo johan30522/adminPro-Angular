@@ -11,7 +11,7 @@
     </div>
 </div>
 
-<div class="row  animated fadeIn fast">
+<div *ngIf="loading" class="row  animated fadeIn fast">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -34,6 +34,13 @@
             <div class="card-body">
                 <h4 class="card-title">Medicos</h4>
                 <h6 class="card-subtitle">MEdicos registrados en la aplicación</h6>
+                <div class="text-right">
+                    <button class="btn btn-primary" (click)="createMedico()">
+                        <i class="fa fa-hospital-o">
+                        </i>
+                        Nuevo Medico
+                    </button>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
@@ -54,17 +61,13 @@
                                     <img class="img-avatar-mini cursorPointer" src="{{medico.img!|imagenUrl:'medicos'}}" (click)="showModal(medico)" alt="">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" placeholder="hospital" id="name" [(ngModel)]="medico.name">
+                                    {{medico.name}}
                                 </td>
                                 <td>
-                                    {{medico.hospital!._id}}
-                                    <select class="custom-select col-3" id="inlineFormCustomSelect" value="61b785b7bd6edc6ff8a322eb">
-                                        <option selected="">Choose...</option>
-                                        <option  *ngFor="let hospital of listaHospital" value="{{hospital.id}}">{{hospital.name}}</option>
-                                    </select>
+                                    {{medico.hospital!.name}}
                                 </td>
                                 <td class="text-nowrap text-center">
-                                    <a (click)="salvar(medico)" data-toggle="tooltip" data-original-title="guardar" class="cursorPointer"> <i class="fa fa-save text-inverse m-r-10"></i> </a>
+                                    <a (click)="editMedico(medico)" data-toggle="tooltip" data-original-title="guardar" class="cursorPointer"> <i class="fa fa-edit text-inverse m-r-10"></i> </a>
                                     <a (click)="eliminar(medico)" data-toggle="tooltip" data-original-title="Borrar" class="cursorPointer"> <i class="fa fa-close text-danger"></i> </a>
                                 </td>
                             </tr>

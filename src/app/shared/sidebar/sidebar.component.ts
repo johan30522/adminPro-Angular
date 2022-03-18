@@ -16,24 +16,25 @@ import { UsuarioService } from '../../auth/services/usuario.service';
   ]
 })
 export class SidebarComponent implements OnInit {
-  public usuario?:Usuario;
+  public usuario?: Usuario;
 
-public menu:any;
+  //public menu: any;
 
   constructor(
-    private readonly sidebarService:SidebarService,
-    private readonly router:Router,
-    private readonly usuarioService:UsuarioService
-    ) {
+    public readonly sidebarService: SidebarService,
+    private readonly router: Router,
+    private readonly usuarioService: UsuarioService
+  ) {
 
-    this.menu=sidebarService.menuItems;
-
-   }
+    //this.menu = sidebarService.menuItems;
+    sidebarService.cargarMenu();
+  
+  }
 
   ngOnInit(): void {
-    this.usuario=this.usuarioService._usuario!;
+    this.usuario = this.usuarioService._usuario!;
   }
-  public logout():void{
+  public logout(): void {
     this.usuarioService.logOut();
   }
 

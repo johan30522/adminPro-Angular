@@ -53,11 +53,11 @@ export class MedicosService {
       )
 
   }
-  public updateMedicos(data: Medico) {
+  public updateMedicos(data: Medico,id:string) {
 
-    const url = `${this._urlApi}medicos/${data.id}`
+    const url = `${this._urlApi}medicos/${id}`
     const headers = this.headers;
-
+console.log(`el id es ${id}`);
 
     return this.httpClient.put<MedResponse>(url, data, { headers })
       .pipe(

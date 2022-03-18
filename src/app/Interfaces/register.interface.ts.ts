@@ -17,7 +17,8 @@ export interface AuthResponse{
     name?:string,
     token?: string,
     tokenAuth?:string,
-    usuario?:Usuario
+    usuario?:Usuario,
+    menu?:string
 }
 
 export interface Usuario{

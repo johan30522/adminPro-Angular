@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SidebarService {
-  private menu:any[]=[
+ /* private menu:any[]=[
     {
       tittle:'Dashboard',
       icon:'mdi mdi-gauge',
@@ -53,15 +53,23 @@ export class SidebarService {
         }
       ]
     }
-  ];
+  ];*/
+
+  private menu=[];
 
   
 
-
+public cargarMenu():void{
+  //se carga del menu que se cargo previamente al loeuarse
+  this.menu=JSON.parse(localStorage.getItem('menu')!) || [];
+}
 public get menuItems() : any {
   return this.menu;
 }
 
 
-  constructor() { }
+  constructor() {
+
+    this.cargarMenu()
+   }
 }

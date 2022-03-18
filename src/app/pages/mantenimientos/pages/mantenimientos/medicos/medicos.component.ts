@@ -70,27 +70,7 @@ export class MedicosComponent implements OnInit {
     this.loadMedicos()
   }
 
-  public salvar(medico:Medico){
-    this.medicosService.updateMedicos(medico).subscribe(
-      (resp) => {
-        console.log(resp);
-  
-        if (resp === true) {
-          console.log('Actualizado');
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Medico Actualizado Correctamente',
-            showConfirmButton: false,
-            timer: 1500
-          });
-        } else {
-          console.log('error', resp);
-          Swal.fire('Error', resp, 'error');
-        }
-  
-      })
-  }
+
   public eliminar(medico:Medico){
   
       Swal.fire({
@@ -136,6 +116,18 @@ export class MedicosComponent implements OnInit {
       this.loadMedicos()
     });
   }
+
+  public editMedico(medico:Medico){
+    const modalRef = this.modalService.open(ModalMedicoComponent, {
+      size: 'md',
+      centered: true,
+    });
+    modalRef.componentInstance.medico = medico;
+    modalRef.componentInstance.successfulTransaction.subscribe(() => {
+      this.loadMedicos()
+    });
+  }
+
   
   
   public buscar(termino: string): void {

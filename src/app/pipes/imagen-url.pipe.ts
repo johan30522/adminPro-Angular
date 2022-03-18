@@ -11,8 +11,7 @@ export class ImagenUrlPipe implements PipeTransform {
 
     let imgReturn: string = '';
     //console.log(this.email,this.img);
-    console.log('imagen:',img);
-    console.log('tipo',tipo);
+  
     if (!img) {
       imgReturn = `${base_URL}upload/${tipo}/no-image.png`;
     } else {

@@ -34,15 +34,25 @@ export class HospitalesService {
     return this.httpClient.get<CargaHospitales>(url, { headers })
       .pipe(
         map((resp) => {
-          console.log(resp);
           const hospitales = resp.hospitals
             .map(hosp => new Hospital(hosp.name, hosp.id, hosp.img, hosp.usuario))
           return { total: resp.total, hospitales: hospitales };
         })
       );
-    /* .pipe(
-       map((resp:{total:number,hospitals:Hospital[]})=>resp.hospitals)
-     );*/
+
+  }
+  public getHospitalsTodo() {
+    const url = `${this._urlApi}hospitales/todo`;
+    const headers = this.headers;
+    return this.httpClient.get<CargaHospitales>(url, { headers })
+      .pipe(
+        map((resp) => {
+          const hospitales = resp.hospitals
+            .map(hosp => new Hospital(hosp.name, hosp.id, hosp.img, hosp.usuario))
+          return { total: resp.total, hospitales: hospitales };
+        })
+      );
+
   }
 
 

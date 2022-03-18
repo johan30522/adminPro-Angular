@@ -12,6 +12,9 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MedicosComponent } from './mantenimientos/pages/mantenimientos/medicos/medicos.component';
 import { HospitalesComponent } from './mantenimientos/pages/mantenimientos/hospitales/hospitales.component';
+import { SearchComponent } from './search/search.component';
+import { ChatbotComponent } from './chatbot/chatbot.component';
+import { AdminGuard } from '../guards/admin.guard';
 
 
 const routes: Routes = [
@@ -28,9 +31,22 @@ const routes: Routes = [
       { path: 'observers', component: ObserversComponent,data:{tittle:'Observers'} },
       { path: 'rxjs', component: RxjsComponent ,data:{tittle:'Operators RXJS'}},
 
-      { path: 'usuarios', component: UsuariosComponent,data:{tittle:'Usuarios'}  },
-      { path: 'medicos', component: MedicosComponent,data:{tittle:'Medicos'} },
-      { path: 'hospitales', component: HospitalesComponent ,data:{tittle:'Hospitales'}},
+      { path: 'chatbot', component: ChatbotComponent ,data:{tittle:'Chat bot'}},
+
+
+      //Rtas de Admin**********************
+      { path: 'usuarios', component: UsuariosComponent,data:{tittle:'Usuarios'}
+        ,canActivate:[AdminGuard],canLoad:[AdminGuard]},
+      { path: 'medicos', component: MedicosComponent,data:{tittle:'Medicos'},
+        canActivate:[AdminGuard],canLoad:[AdminGuard]},
+      { path: 'hospitales', component: HospitalesComponent ,data:{tittle:'Hospitales'},
+        canActivate:[AdminGuard],canLoad:[AdminGuard]},
+      //************************************************************************* */
+
+
+
+
+      { path: 'search/:termino', component: SearchComponent ,data:{tittle:'Busqueda'}},
 
 
 
